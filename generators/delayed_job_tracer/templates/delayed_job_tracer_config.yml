@@ -1,0 +1,64 @@
+# Application's name
+# This will be the prefix of alert e-mail subject lines, which will have brackets
+# added around it. 
+# Example:  App Name => [App Name] 
+app: 
+  name: <%= app_name %>
+
+  
+# Administrative e-mail address to send alerts to
+admin: 
+  email: 
+  
+
+# Mailer class name
+# Set this to the ActionMailer class that the application uses to send e-mail,
+# which you should mix DelayedJobTracerMailer into.  This will be used in the 
+# delayed_job record 'handler' entries that are inserted into the delayed_jobs
+# table. 
+mailer:
+  class: Mailer
+  
+  
+# Number of seconds after a delayed_job is considered stale.
+# An e-mail will be sent to the admin if records older than this are found
+# in the delayed_jobs table.  This will catch 3 scenarios:
+#   1) The delayed_job process locked up or crashed and jobs stopeed running
+#   2) One or more jobs failed and could not succeed on retry
+#   3) One or more jobs are taking longer than the number of seconds set here
+#      to complete
+delayed_job:
+  stale: 3600 
+  
+  
+# Application's production database
+database:
+  ip: <%= db_host %>
+  database: <%= db_database %>
+  user: <%= db_username %>
+  password: <%= db_password %>
+
+
+# E-mail account to monitor for test messages
+# This account will be checked periodically via a cron'd execution of runner.rb to
+# ensure that a recent monitoring message has been delivered sucessfully to that
+# e-mail account.
+monitor:
+  server: <%= mail_domain %>
+  username: <%= mail_username %>
+  password: <%= mail_password %>
+  port: 993
+  ssl: true
+  folder: Monitoring
+
+
+# E-mail account to send admin alerts through via a perl script.
+# You should use a different account than the applicaiton uses, so alert messages can
+# still be sent if for example the Gmail send limit is exceeded for the application's
+# e-mail account and Google puts it on lockdown.
+alert:
+  server: smtp.gmail.com
+  username: 
+  password: 
+  port: 25
+  tls: true

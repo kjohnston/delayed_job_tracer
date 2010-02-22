@@ -1,0 +1,1 @@
+require File.dirname(__FILE__) + '/lib/delayed_job_tracer_mailer'

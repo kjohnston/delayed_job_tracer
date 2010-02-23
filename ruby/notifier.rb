@@ -21,7 +21,7 @@ class Notifier
     appname   = c['app']['name']
     subject   = "[#{appname}] Delayed Job Tracer: " + subject_suffix
     message   = "#{appname} " + message_suffix
-    system    "sendEmail -f #{account['username']} -t #{recipient} -u '#{subject}' -m #{message} \
+    system    "/usr/local/bin/sendEmail -f #{account['username']} -t #{recipient} -u '#{subject}' -m #{message} \
                 -s #{account['server']}:#{account['port']} -xu #{account['username']} -xp #{account['password']} \
                 #{ '-o tls=yes' if c['alert']['tls'] == 'true' }"
   end

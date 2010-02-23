@@ -18,7 +18,7 @@ This plugin also detects wither e-mails sent through delayed_job are actually be
 == Why use a Cron'd ruby process to monitor delayed_job and e-mail delivery?
 
 * Cron is often considered to be more reliable than process monitoring tools like Monit or God.
-* The cron'd ruby process only uses a modest amount of memory (~27MB) for a few seconds at regular intervals, whereas a rake task or runner would equate to the entire size of the Rails application, with a memory footprint that grows over time.
+* The Cron'd ruby process only uses a modest amount of memory (~27MB) for a few seconds at regular intervals, whereas a rake task or runner would equate to the entire size of the Rails application, with a memory footprint that grows over time.
 
 
 == Why use a Perl Script to send alert e-mails to admins?
@@ -30,17 +30,39 @@ This plugin also detects wither e-mails sent through delayed_job are actually be
 
 == Prerequisites
 
-* mms2r gem (http://github.com/monde/mms2r)
-* tmail gem (http://github.com/mikel/tmail)
-* ruby-mysql gem (http://github.com/tmtm/ruby-mysql)
-* sendEmail Perl script (http://caspian.dotconf.net/menu/Software/SendEmail)
-* The necessary Perl SSL packages:
+Note package installations are per Ubuntu 9.04 (Jaunty Jackalope), you may need to find alternate packages, depending on your platform.
 
-		- Works with Ubuntu 9.04 (Jaunty Jackalope) -
+1) XML Packages (pre-requisites for mms2r gem):
+
+	sudo apt-get install libxml2-dev
+	sudo apt-get install libxslt-dev
+	
+2) mms2r gem:
+
+	sudo gem install mms2r
+
+3) sendEmail Perl script:
+
+	Download from http://caspian.dotconf.net/menu/Software/SendEmail and follow the setup instructions, or just follow these instructions:
+	
+		wget -c http://caspian.dotconf.net/menu/Software/SendEmail/sendEmail-v1.56.tar.gz
+		tar xvfz sendEmail-v1.56.tar.gz
+		sudo cp -a sendEmail-v1.56/sendEmail /usr/local/bin
+		chmod +x /usr/local/bin/sendEmail
 		
-		apt-get install libnet-ssleay-perl 
-		apt-get install libcrypt-ssleay-perl 
-		apt-get install libio-socket-ssl-perl
+		Run it to be sure it works:
+		
+		sendEmail
+		
+		Cleanup
+		
+		rm -rf sendEmail-v1.56*
+	
+4) Perl SSL packages (needed for sendEmail to send email):
+		
+		sudo apt-get install libnet-ssleay-perl
+		sudo apt-get install libcrypt-ssleay-perl
+		sudo apt-get install libio-socket-ssl-perl
 
 
 == Installation
@@ -66,11 +88,11 @@ This plugin also detects wither e-mails sent through delayed_job are actually be
 
 * Create a 'Monitoring' label in the e-mail account you configure the plugin to send test messages to and a filter to move all incoming messages with '[Monitoring]' in the subject line to this folder (or label if you're using Gmail).  Set the name of this folder in the config/delayed_job_tracer_config.yml file - as it will be the folder that the ruby process checks for test messages.
 
-* Add a cron job:
+* Add a Cron job to your server:
 
-	- Example for running every 30 minutes, replace with your actual app and ruby locations -
+	- Example for running every 15 minutes, replace with your actual app and ruby locations -
 
-	*/30 * * * * cd /opt/apps/app_name/current/vendor/plugins/delayed_job_tracer/ruby && /usr/local/bin/ruby runner.rb
+	*/15 * * * * cd /opt/apps/app_name/current/vendor/plugins/delayed_job_tracer/ruby && /usr/local/bin/ruby runner.rb
 	
 * Finish configuring your settings in the config/delayed_job_tracer_config.yml file.  Your database and ActionMailer config will be applied via the generator, but you'll still need to provide an alternate e-mail account to send administrative notifications through, provide the admin's e-mail address and so forth.
 

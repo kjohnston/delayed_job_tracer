@@ -34,12 +34,12 @@ Note package installations are per Ubuntu 9.04 (Jaunty Jackalope), you may need 
 
 1) XML Packages (pre-requisites for mms2r gem):
 
-	sudo apt-get install libxml2-dev
-	sudo apt-get install libxslt-dev
+	sudo apt-get install libxml2-dev libxslt-dev
 	
-2) mms2r gem:
+2) Install Gems:
 
-	sudo gem install mms2r
+	sudo gem install daemons tmail tlsmail		(omit daemons if you're not using it to daemonize delayed_job)
+	sudo gem install mms2r -v 2.4.1
 
 3) sendEmail Perl script:
 
@@ -54,15 +54,13 @@ Note package installations are per Ubuntu 9.04 (Jaunty Jackalope), you may need 
 		
 		sendEmail
 		
-		Cleanup
+		Cleanup:
 		
 		rm -rf sendEmail-v1.56*
 	
 4) Perl SSL packages (needed for sendEmail to send email):
 		
-		sudo apt-get install libnet-ssleay-perl
-		sudo apt-get install libcrypt-ssleay-perl
-		sudo apt-get install libio-socket-ssl-perl
+		sudo apt-get install libnet-ssleay-perl libcrypt-ssleay-perl libio-socket-ssl-perl
 
 
 == Installation

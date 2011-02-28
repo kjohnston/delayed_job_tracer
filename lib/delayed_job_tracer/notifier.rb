@@ -15,11 +15,11 @@ class Notifier
   end
   
   def self.send_notification(subject_suffix, message_suffix)
-    c         = YAML.load_file(File.join(File.dirname(__FILE__), *%w[.. .. .. .. config delayed_job_tracer_config.yml]))
+    c         = DelayedJobTracer.config
     account   = c['alert']
     recipient = c['admin']['email']
     appname   = c['app']['name']
-    subject   = "[#{appname}] Delayed Job Tracer: " + subject_suffix
+    subject   = "[#{appname}] DelayedJobTracer: " + subject_suffix
     message   = "#{appname} " + message_suffix
     system    "/usr/local/bin/sendEmail -f #{account['username']} -t #{recipient} -u '#{subject}' -m #{message} \
                 -s #{account['server']}:#{account['port']} -xu #{account['username']} -xp #{account['password']} \

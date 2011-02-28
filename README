@@ -1,10 +1,8 @@
 = Delayed Job Tracer Plugin for Rails
 
-RDoc URL: http://rdoc.info/projects/kjohnston/delayed_job_tracer
+Delayed Job Tracer is designed to monitor the delayed_job, which was extracted from Shopify (http://github.com/tobi/delayed_job), but is now maintained at (http://github.com/collectiveidea/delayed_job_tracer).  It will alert you via e-mail if something goes wrong, such as the delayed_job process crashes or one of its jobs fails or takes too long to complete.
 
-Delayed Job Tracer is designed to monitor the delayed_job plugin, which was extracted from Shopify (http://github.com/tobi/delayed_job/).  It will alert you via e-mail if something goes wrong, such as the delayed_job process crashes or one of its jobs fails or takes too long to complete.
-
-This plugin also detects wither e-mails sent through delayed_job are actually being delivered by sending test messages to an e-mail account then checking that account to ensure they were processed and dispatched via the delayed_job queue.  The e-mail delivery detection allows you to be notified if e-mails can't be sent out either because of delayed_job having choked or because of an issue with the e-mail account the application uses to send e-mail.
+This gem also detects wither e-mails sent through delayed_job are actually being delivered by sending test messages to an e-mail account then checking that account to ensure they were processed and dispatched via the delayed_job queue.  The e-mail delivery detection allows you to be notified if e-mails can't be sent out either because of delayed_job having choked or because of an issue with the e-mail account the application uses to send e-mail.
 
 
 == Primary Features
@@ -18,30 +16,25 @@ This plugin also detects wither e-mails sent through delayed_job are actually be
 == Why use a Cron'd ruby process to monitor delayed_job and e-mail delivery?
 
 * Cron is often considered to be more reliable than process monitoring tools like Monit or God.
-* The Cron'd ruby process only uses a modest amount of memory (~27MB) for a few seconds at regular intervals, whereas a rake task or runner would equate to the entire size of the Rails application, with a memory footprint that grows over time.
+* The Cron'd Ruby process only uses a modest amount of memory (~27MB) for a few seconds at regular intervals, whereas a rake task or runner would equate to the entire size of the Rails application, with a memory footprint that grows over time.
 
 
 == Why use a Perl Script to send alert e-mails to admins?
 
 * It's fast
 * It doesn't rely on the Rails application
-* It doesn't rely on the delayed_job process you're monitoring with this plugin
+* It doesn't rely on the delayed_job process you're monitoring with this gem
 
 
 == Prerequisites
 
-Note package installations are per Ubuntu 9.04 (Jaunty Jackalope), you may need to find alternate packages, depending on your platform.
+1) Install XML and SSL Packages:
 
-1) XML Packages (pre-requisites for mms2r gem):
+	Note: These are for Ubuntu.  You may need to find alternate packages, depending on your platform.
 
-	sudo apt-get install libxml2-dev libxslt-dev
-	
-2) Install Gems:
+	sudo apt-get install libxml2-dev libxslt-dev libnet-ssleay-perl libcrypt-ssleay-perl libio-socket-ssl-perl
 
-	sudo gem install daemons tmail tlsmail		(omit daemons if you're not using it to daemonize delayed_job)
-	sudo gem install mms2r -v 2.4.1
-
-3) sendEmail Perl script:
+2) sendEmail Perl script:
 
 	Download from http://caspian.dotconf.net/menu/Software/SendEmail and follow the setup instructions, or just follow these instructions:
 	
@@ -58,39 +51,27 @@ Note package installations are per Ubuntu 9.04 (Jaunty Jackalope), you may need 
 		
 		rm -rf sendEmail-v1.56*
 	
-4) Perl SSL packages (needed for sendEmail to send email):
-		
-		sudo apt-get install libnet-ssleay-perl libcrypt-ssleay-perl libio-socket-ssl-perl
-
 
 == Installation
 
-1) Install the plugin:
+1) Add the gem to your Gemfile:
 
-	script/plugin install git://github.com/kjohnston/delayed_job_tracer.git
+	gem 'delayed_job_tracer'
 	
 2) Generate the config file:
 
-	script/generate delayed_job_tracer
+	rails g delayed_job_tracer
 	
-2) Mix the DelayedJobTracerMailer module into your ActionMailer mailer class (whatever you named it).
-
-	Example:
-	
-		class Mailer < ActionMailer::Base
-		  include DelayedJobTracerMailer
-		end
-
 
 == Configuration
 
-* Create a 'Monitoring' label in the e-mail account you configure the plugin to send test messages to and a filter to move all incoming messages with '[Monitoring]' in the subject line to this folder (or label if you're using Gmail).  Set the name of this folder in the config/delayed_job_tracer_config.yml file - as it will be the folder that the ruby process checks for test messages.
+* Create a 'DelayedJobTracer' folder/label in the e-mail account you configure the plugin to send test messages to and a filter to move all incoming messages with '[DelayedJobTracer]' in the subject line to this folder (or label if you're using Gmail).  Set the name of this folder in the config/delayed_job_tracer_config.yml file - as it will be the folder that the Ruby process checks for test messages.
 
 * Add a Cron job to your server:
 
 	- Example for running every 15 minutes, replace with your actual app and ruby locations -
 
-	*/15 * * * * cd /opt/apps/app_name/current/vendor/plugins/delayed_job_tracer/ruby && /usr/local/bin/ruby runner.rb
+	*/15 * * * * delayed_job_tracer -c /opt/apps/appname/current/config/delayed_job_tracer_config.yml
 	
 * Finish configuring your settings in the config/delayed_job_tracer_config.yml file.  Your database and ActionMailer config will be applied via the generator, but you'll still need to provide an alternate e-mail account to send administrative notifications through, provide the admin's e-mail address and so forth.
 
@@ -99,7 +80,7 @@ Note package installations are per Ubuntu 9.04 (Jaunty Jackalope), you may need 
 
 The MIT License
 
-Copyright (c) 2010 Kenny Johnston
+Copyright (c) 2010-2011 Kenny Johnston
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

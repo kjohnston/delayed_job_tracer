@@ -4,7 +4,7 @@ class MySQLInterface
   
   # Connects to the db and submits a query
   def self.query(sql)
-    c = YAML.load_file(File.join(File.dirname(__FILE__), *%w[.. .. .. .. config delayed_job_tracer_config.yml]))['database']
+    c = DelayedJobTracer.config['database']
     d = Mysql::new(c['ip'], c['user'], c['password'], c['database'])
     d.query(sql)
   end
@@ -21,7 +21,7 @@ class MySQLInterface
   
   # SQL for selecting stale delayed_job records
   def self.delayed_job_stale_records
-    c = YAML.load_file(File.join(File.dirname(__FILE__), *%w[.. .. .. .. config delayed_job_tracer_config.yml]))['delayed_job']
+    c = DelayedJobTracer.config['delayed_job']
     "SELECT * FROM delayed_jobs WHERE created_at < '#{(Time.now-c['stale']).utc.strftime("%Y-%m-%d %H:%M:%S")}'"
   end
   
@@ -33,10 +33,9 @@ class MySQLInterface
   
   # SQL helper method for inserting a delayed_job record
   def self.delayed_job_handler
-    mailer_class = YAML.load_file(File.join(File.dirname(__FILE__), *%w[.. .. .. .. config delayed_job_tracer_config.yml]))['mailer']['class']
-    "--- !ruby/struct:Delayed::PerformableMethod 
-object: CLASS:#{mailer_class}
-method: :deliver_delayed_job_test_message
+    "--- !ruby/struct:Delayed::PerformableMailer 
+object: !ruby/class DelayedJobTracerMailer
+method_name: :delayed_job_tracer_test_message
 args: []"
   end
   

@@ -1,0 +1,38 @@
+#!/usr/bin/env ruby
+
+require 'delayed_job_tracer'
+require 'optparse'
+require 'yaml'
+
+options = {}
+
+optparse = OptionParser.new do |opts|
+  # Displayed at top of help screen
+  opts.banner = "Usage: delayed_job_tracer -c /opt/apps/myapp/current/config/delayed_job_tracer_config.yml"
+
+  opts.on( '-c', '--config FILE', 'Path to config file' ) do |file|
+    options[:config] = file
+  end
+
+  opts.on( '-h', '--help', 'Display this screen' ) do
+    puts opts
+    exit
+  end
+end
+
+# Parse the command-line. Remember there are two forms
+# of the parse method. The 'parse' method simply parses
+# ARGV, while the 'parse!' method parses ARGV and removes
+# any options found there, as well as any parameters for
+# the options. What's left is the list of files to resize.
+optparse.parse!
+
+begin
+  raise "no config file provided" unless options[:config]
+  raise "no config file found at '#{options[:config]}'" unless File.exists?(options[:config])
+  config = YAML.load_file(options[:config])
+  raise "incorrect config file: '#{options[:config]}'" unless config['app']
+  DelayedJobTracer.run(config)
+rescue Exception => e
+  puts "Error: #{e}"
+end

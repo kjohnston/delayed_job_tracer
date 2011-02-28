@@ -7,7 +7,7 @@ require 'yaml'
 class MessageFinder
   
   def self.found_recent_message?
-    c = YAML.load_file(File.join(File.dirname(__FILE__), *%w[.. .. .. .. config delayed_job_tracer_config.yml]))['monitor']
+    c = DelayedJobTracer.config['monitor']
     
     server   = c['server']
     port     = c['port'] || 143

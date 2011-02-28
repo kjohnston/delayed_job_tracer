@@ -11,15 +11,6 @@ admin:
   email: 
   
 
-# Mailer class name
-# Set this to the ActionMailer class that the application uses to send e-mail,
-# which you should mix DelayedJobTracerMailer into.  This will be used in the 
-# delayed_job record 'handler' entries that are inserted into the delayed_jobs
-# table. 
-mailer:
-  class: Mailer
-  
-  
 # Number of seconds after a delayed_job is considered stale.
 # An e-mail will be sent to the admin if records older than this are found
 # in the delayed_jobs table.  This will catch 3 scenarios:
@@ -49,7 +40,7 @@ monitor:
   password: <%= mail_password %>
   port: 993
   ssl: true
-  folder: Monitoring
+  folder: DelayedJobTracer
 
 
 # E-mail account to send admin alerts through via a perl script.

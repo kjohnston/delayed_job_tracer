@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Kenny Johnston"]
   s.email       = ["kjohnston.ca@gmail.com"]
-  s.homepage    = ""
+  s.homepage    = "https://github.com/kjohnston/delayed_job_tracer"
   s.summary     = %q{Like a tracer bullet for your delayed_job queue}
   s.description = %q{Monitors the delayed_job queue and periodically tests its ability to deliver 
                      e-mail messages and e-mails you if something goes wrong, such as the delayed_job 
@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency('tmail')
   s.add_dependency('mms2r', '2.4.1')
-  s.add_dependency('mysql', '2.7')
+  s.add_dependency('mysql', '>=2.7')
 
   s.files              = `git ls-files`.split("\n")
   s.test_files         = `git ls-files -- {test,spec,features}/*`.split("\n")

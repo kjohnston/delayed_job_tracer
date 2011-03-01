@@ -1,6 +1,6 @@
 h1. delayed_job_tracer Gem for Rails
 
-The delayed_job_tracer gem is designed to monitor the delayed_job gem, which was extracted from Shopify ("http://github.com/tobi/delayed_job":http://github.com/tobi/delayed_job), but is now maintained at ("http://github.com/collectiveidea/delayed_job_tracer":http://github.com/collectiveidea/delayed_job_tracer).  It will alert you via e-mail if something goes wrong, such as if the delayed_job process crashes or one of its jobs fails or takes too long to complete.
+The delayed_job_tracer gem is designed to monitor the delayed_job gem, which was extracted from Shopify ("http://github.com/tobi/delayed_job":http://github.com/tobi/delayed_job), but is now maintained at ("https://github.com/collectiveidea/delayed_job":https://github.com/collectiveidea/delayed_job).  It will alert you via e-mail if something goes wrong, such as if the delayed_job process crashes or one of its jobs fails or takes too long to complete.
 
 This gem also detects wither e-mails sent through delayed_job are actually being delivered by sending test messages (like tracer bullets) to an e-mail account then checking that account to ensure they were processed and dispatched via the delayed_job queue.  The e-mail delivery detection allows you to be notified if e-mails can't be sent out either because of delayed_job having choked or because of an issue with the e-mail account the application uses to send e-mail.
 

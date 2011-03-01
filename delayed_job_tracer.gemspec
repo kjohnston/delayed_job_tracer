@@ -14,9 +14,9 @@ Gem::Specification.new do |s|
                      e-mail messages and e-mails you if something goes wrong, such as the delayed_job 
                      process crashes or one of its jobs fails or takes too long to complete.}
 
-  s.add_dependency('tmail')
+  s.add_dependency('tmail', '1.2.7.1')
   s.add_dependency('mms2r', '2.4.1')
-  s.add_dependency('mysql', '>=2.7')
+  s.add_dependency('mysql', '2.7')
 
   s.files              = `git ls-files`.split("\n")
   s.test_files         = `git ls-files -- {test,spec,features}/*`.split("\n")

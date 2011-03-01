@@ -1,4 +1,4 @@
-h1. delayed_job_tracer Gem for Rails
+h1. delayed_job_tracer
 
 The delayed_job_tracer gem is designed to monitor the delayed_job gem, which was extracted from Shopify ("http://github.com/tobi/delayed_job":http://github.com/tobi/delayed_job), but is now maintained at ("https://github.com/collectiveidea/delayed_job":https://github.com/collectiveidea/delayed_job).  It will alert you via e-mail if something goes wrong, such as if the delayed_job process crashes or one of its jobs fails or takes too long to complete.
 

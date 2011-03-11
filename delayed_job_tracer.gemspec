@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency('tmail', '1.2.7.1')
   s.add_dependency('mms2r', '2.4.1')
-  s.add_dependency('mysql', '2.7')
+  s.add_dependency('mysql2', '0.2.6')
 
   s.files              = `git ls-files`.split("\n")
   s.test_files         = `git ls-files -- {test,spec,features}/*`.split("\n")

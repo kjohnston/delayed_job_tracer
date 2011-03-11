@@ -1,11 +1,11 @@
-require 'mysql'
+require 'mysql2'
 
 class MySQLInterface
   
   # Connects to the db and submits a query
   def self.query(sql)
     c = DelayedJobTracer.config['database']
-    d = Mysql::new(c['ip'], c['user'], c['password'], c['database'])
+    d = Mysql2::Client.new(:host => c['ip'], :database => c['database'], :username => c['user'], :password => c['password'])
     d.query(sql)
   end
   

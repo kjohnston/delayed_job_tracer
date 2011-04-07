@@ -11,7 +11,7 @@ class MySQLInterface
   
   # Returns true if there are no stale records
   def self.delayed_job_queue_ok?
-    query(delayed_job_stale_records).num_rows.zero?
+    query(delayed_job_stale_records).count.zero?
   end
   
   # Inserts a delayed_job record

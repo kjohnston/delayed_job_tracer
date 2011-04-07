@@ -85,6 +85,8 @@ Example for running every 15 minutes, replace with your actual app and ruby loca
 <pre>
 */15 * * * * /usr/local/bin/delayed_job_tracer -c /opt/apps/appname/current/config/delayed_job_tracer_config.yml
 </pre>
+
+*Note*: If you're using bundler to install gems within an application-specific gem environment, you may need to also install the gem manually on the server so that the executable is available via the location in the example cron entry above.
 	
 * Finish configuring your settings in the config/delayed_job_tracer_config.yml file.  Your database and ActionMailer config will be applied via the generator, but you'll still need to provide an alternate e-mail account to send administrative notifications through, provide the admin's e-mail address and so forth.
 

@@ -4,7 +4,7 @@ else
   require File.dirname(__FILE__) + '/delayed_job_tracer/notifier'
   require File.dirname(__FILE__) + '/delayed_job_tracer/message_finder'
   require File.dirname(__FILE__) + '/delayed_job_tracer/mysql_interface'
-  
+
   class DelayedJobTracer
 
     def self.config

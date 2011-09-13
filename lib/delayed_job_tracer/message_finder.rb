@@ -5,22 +5,22 @@ require 'mms2r'
 require 'yaml'
 
 class MessageFinder
-  
+
   def self.found_recent_message?
     c = DelayedJobTracer.config['monitor']
-    
+
     server   = c['server']
     port     = c['port'] || 143
     ssl      = c['ssl'] || false
     username = c['username']
     password = c['password']
     folder   = c['folder']
-    
+
     imap = Net::IMAP.new server, port, ssl
     imap.login username, password
     imap.select folder
     uids = imap.search(["UNSEEN"])
-    
+
     emails = []
     times = []
 
@@ -39,12 +39,12 @@ class MessageFinder
     end
 
     imap.disconnect
-    
+
     # Delete tmp files used by mms2r
     emails.map{|m| m[:mms].purge }
 
     # Just checks to see if there was at least one recent unread message
     return true unless times.blank?
   end
-  
+
 end

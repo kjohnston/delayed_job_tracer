@@ -85,4 +85,4 @@ Finish configuring your settings in the config/delayed_job_tracer_config.yml fil
 ## License
 
 * Freely distributable and licensed under the [MIT license](http://kjohnston.mit-license.org/license.html).
-* Copyright (c) 2011-2012 Kenny Johnston [![endorse](http://api.coderwall.com/kjohnston/endorsecount.png)](http://coderwall.com/kjohnston)
+* Copyright (c) 2010-2012 Kenny Johnston [![endorse](http://api.coderwall.com/kjohnston/endorsecount.png)](http://coderwall.com/kjohnston)

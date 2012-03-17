@@ -1,7 +1,4 @@
-delayed_job_tracer -- Like a tracer bullet for your delayed_job queue.
-====================================
-
-## DESCRIPTION
+# delayed_job_tracer
 
 The delayed_job_tracer gem is designed to monitor the delayed_job gem ([https://github.com/collectiveidea/delayed_job](https://github.com/collectiveidea/delayed_job)).  It will alert you via e-mail if something goes wrong, such as if the delayed_job process crashes or one of its jobs fails or takes too long to complete.
 
@@ -85,27 +82,7 @@ Note: If you're using bundler to install gems within an application-specific gem
 
 Finish configuring your settings in the config/delayed_job_tracer_config.yml file.  Your database and ActionMailer config will be applied via the generator, but you'll still need to provide an alternate e-mail account to send administrative notifications through, provide the admin's e-mail address and so forth.
 
-
 ## License
 
-The MIT License
-
-Copyright (c) 2010-2011 Kenny Johnston
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
+* Freely distributable and licensed under the [MIT license](http://kjohnston.mit-license.org/license.html).
+* Copyright (c) 2011-2012 Kenny Johnston [![endorse](http://api.coderwall.com/kjohnston/endorsecount.png)](http://coderwall.com/kjohnston)

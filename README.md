@@ -42,7 +42,7 @@ Note: These are for Ubuntu.  You may need to find alternate packages for your pl
 
 2) sendEmail Perl script:
 
-Download from "http://caspian.dotconf.net/menu/Software/SendEmail":http://caspian.dotconf.net/menu/Software/SendEmail and follow the setup instructions, or just follow these instructions:
+Download from [http://caspian.dotconf.net/menu/Software/SendEmail](http://caspian.dotconf.net/menu/Software/SendEmail) and follow the setup instructions, or just follow these instructions:
 
   wget -c http://caspian.dotconf.net/menu/Software/SendEmail/sendEmail-v1.56.tar.gz
   tar xvfz sendEmail-v1.56.tar.gz
